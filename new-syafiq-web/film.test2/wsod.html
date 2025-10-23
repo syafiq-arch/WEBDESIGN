@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper Demo - Film Covers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+      background: #222220;
+      color: #fff;
+      font-family: Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f562aaf4-5dbb-4603-a32b-6ef6c2230136/dh0w8qv-9d8ee6b2-b41a-4681-ab9b-8a227560dc75.jpg/v1/fill/w_1280,h_720,q_75,strp/the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6Ii9mL2Y1NjJhYWY0LTVkYmItNDYwMy1hMzJiLTZlZjZjMjIzMDEzNi9kaDB3OHF2LTlkOGVlNmIyLWI0MWEtNDY4MS1hYjliLThhMjI3NTYwZGM3NS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.FScrpAAFnKqBVKwe2syeiOww6mfH6avq-DRHZ_uFVNw);
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(34,34,32,1) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .hero-text {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hero-input {
+      padding: 18px 20px;
+      font-size: 16px;
+      width: 400px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      background: rgba(80, 16, 16, 0.5);
+      color: white;
+    }
+
+    .hero-input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .hero-button {
+      padding: 18px 30px;
+      font-size: 24px;
+      font-weight: bold;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero-button:hover {
+      background: #c40812;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 32px;
+    }
+
+    .swiper {
+      width: 90%;
+      height: 60%;
+      border-radius: 30px;
+      margin-top: 4%;
+      filter: brightness(65%);
+      BAC
+    }
+
+    .swiper-slide {
+      position: relative;
+      text-align: center;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+      display: block;
+      transition: 0.4s;
+    }
+
+    .swiper-slide:hover img {
+      filter: brightness(115%);
+      transform: scale(1.03);
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-size: 90px;
+      font-weight: 900;
+      color: white;
+      z-index: 10;
+      -webkit-text-stroke: 6px black;
+      text-shadow: 0 0 10px black;
+      pointer-events: none;
+    }
+
+    .slide-title {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 15px;
+      text-align: center;
+      letter-spacing: 0.5px;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .swiper-pagination {
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 60px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .reason-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 0 7%;
+      margin-bottom: 60px;
+    }
+
+    .reason-box {
+      background: linear-gradient(135deg, #1b002f, #0b0025, #000015);
+      border-radius: 15px;
+      width: 350px;
+      padding: 35px;
+      text-align: left;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .reason-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+    }
+
+    .reason-box h3 {
+      color: #bb86fc;
+      font-size: 26px;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .reason-box p {
+      color: #ccc;
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Unlimited movies, TV shows, and more</h1>
+      <p class="hero-subtitle">Watch Anywhere,Anytime You Want.</p>
+      <p class="hero-text"><b>Ready to watch? Enter your email to create or restart your membership.</b></p>
+      <div class="hero-form">
+        <input type="email" placeholder="Email address" class="hero-input">
+        <button class="hero-button">Get Started›</button>
+      </div>
+    </div>
+  </div>
+
+  <h1>Viral Movies And Series <i class="fa-solid fa-film"></i> </h1>
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="https://resizing.flixster.com/MKd7ThaBjcwK2sJoMUautDFyTsM=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p21971_v_h9_aa.jpg" alt="">
+        <div class="slide-number">1</div>
+        <div class="slide-title">Meet Joe Black &nbsp; <i class ="fa-solid fa-play"></i></div>
+      </div>
+     <div class="swiper-slide">
+        <img src="https://hpph.ams3.cdn.digitaloceanspaces.com/3474/conversions/deadpoets1-wide.webp" alt="">
+        <div class="slide-number">2</div>
+        <div class="slide-title">Dead Poets Society  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://www.cultura.id/wp-content/uploads/2025/04/Good-Will-Hunting.jpg" alt="">
+        <div class="slide-number">3</div>
+        <div class="slide-title">Good Will Hunting  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cloudfront-eu-central-1.images.arcpublishing.com/thenational/3TC7FVI36XFZK2APWJ5DEANNVI.jpg" alt="">
+        <div class="slide-number">4</div>
+        <div class="slide-title">Fear Street  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://imgx.sonora.id/crop/0x0:0x0/x/photo/2025/10/21/16x9_bp2_crtthumbnail_crntrla_-20251021045205.jpg" alt="">
+        <div class="slide-number">5</div>
+        <div class="slide-title">The Black Phone  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://deadline.com/wp-content/uploads/2025/10/stranger-things-season-5-volume-1-episodes.jpg" alt="">
+        <div class="slide-number">6</div>
+        <div class="slide-title">Stranger Things  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/742e9d46-2692-4f3f-9272-0b76d66c891f/8d164b5c-fdac-4296-82ed-1493cc1bd4af?host=wbd-images.prod-vod.h264.io&partner=beamcom" alt="">
+        <div class="slide-number">7</div>
+        <div class="slide-title">Harry Potter  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://m.media-amazon.com/images/M/MV5BMTMzOTk1MzIyN15BMl5BanBnXkFtZTcwNTM3MjczMQ@@._V1_FMjpg_UX1000_.jpg" alt="">
+        <div class="slide-number">8</div>
+        <div class="slide-title">Bridge To Terabithia  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://cdn.rri.co.id/berita/Kediri/o/1758062873180-WhatsApp_Image_2025-09-16_at_12.06.39_(1)/g1iqnsiachqi0is.jpeg" alt="">
+        <div class="slide-number">9</div>
+        <div class="slide-title">The Conjuring Last Rites  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://i.pinimg.com/736x/9b/f9/b9/9bf9b9026974f6040921f3514b29685f.jpg" alt="">
+        <div class="slide-number">10</div>
+        <div class="slide-title">The Outerbanks  &nbsp;<i class="fa-solid fa-play"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Why These Films?</h2>
+  <div class="reason-container">
+    <div class="reason-box">
+      <h3>🎭 Drama</h3>
+      <p>Deep emotional stories that explore the human condition and life's profound moments.</p>
+    </div>
+    <div class="reason-box">
+      <h3>😱 Horror</h3>
+      <p>Spine-chilling tales that keep you on the edge of your seat with thrilling suspense.</p>
+    </div>
+    <div class="reason-box">
+      <h3>✨ Fantasy</h3>
+      <p>Magical worlds and adventures that transport you beyond imagination.</p>
+    </div>
+    <div class="reason-box">
+      <h3>🎬 Classic</h3>
+      <p>Timeless masterpieces that have defined cinema for generations.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+    
+  </script>
+
+</body>
+</html>
